@@ -105,12 +105,11 @@ async def signup_user_service(
     """
     new_user = await create_new_user(CreateUser.model_validate(user.model_dump()), db)
 
-    # Режим "без почты": считаем почту подтвержденной сразу
-    db_user = await get_user_by_id(user_id=new_user.id, db=db)
-    if db_user is not None:
-        await update_user_is_verified(user=db_user, is_verified=True, db=db)
+    # почта НЕ подтверждена сразу
+    verify_token: str = form_short_token(user_id=new_user.id)
+    send_verify_email(recipients=[new_user.email], token=verify_token, bg_task=bg_task)
 
-    return SuccessResponse(msg="Account Created!")
+    return SuccessResponse(msg="Verification email sent. Please check your inbox.")
 
 
 async def resend_verify_service(email: str, db: AsyncSession, bg_task: BackgroundTasks) -> SuccessResponse:
@@ -176,8 +175,8 @@ async def authenticate_user(email: str, password: str, db: AsyncSession) -> User
 
     if user is None:
         raise UserNotFoundException
-    #if not user.is_verified:
-        #raise UserNotVerifiedException
+    if not user.is_verified:
+        raise UserNotVerifiedException
     if user.password_hash is None:
         raise WrongPasswordException(detail="Password not set")
     if not verify_password(password, user.password_hash):

@@ -291,9 +291,16 @@ function updateNav() {
 
 function showToast(msg, isError = false) {
     const toast = document.getElementById('toast');
-    if(!toast) return;
+    if (!toast) return;
+  
     toast.innerText = msg;
-    toast.style.background = isError ? '#e74c3c' : '#2ecc71';
-    toast.classList.remove('hidden');
-    setTimeout(() => toast.classList.add('hidden'), 3000);
-}
+  
+    // сброс классов состояния
+    toast.classList.remove('hidden', 'success', 'error', 'show');
+  
+    // выставляем состояние + показываем
+    toast.classList.add('show', isError ? 'error' : 'success');
+  
+    // авто-скрытие
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }

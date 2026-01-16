@@ -42,7 +42,7 @@ class EmailSettings(BaseSettings):
     DEV_USE_CREDENTIALS: bool = False
     DEV_VALIDATE_CERTS: bool = False
     DEV_MAIL_SERVER: str = "mailpit"   # чтобы даже при включении отправки был корректный хост
-    DEV_SUPPRESS_SEND: bool = True     # главное: подавляем отправку (не будет пытаться подключаться к SMTP)
+    DEV_SUPPRESS_SEND: bool = False     # главное: подавляем отправку (не будет пытаться подключаться к SMTP)
 
 
 
@@ -57,7 +57,7 @@ class EmailSettings(BaseSettings):
     TEST_MAIL_SSL_TLS: bool = False
     TEST_USE_CREDENTIALS: bool = False
     TEST_VALIDATE_CERTS: bool = False
-    TEST_SUPPRESS_SEND: bool = True  # Suppress sending in tests
+    TEST_SUPPRESS_SEND: bool = False  # Suppress sending in tests
 
     TEMPLATES_DIR: str = str(BASE_DIR / "app/templates")
 
