@@ -38,6 +38,11 @@ Frontend: (http://localhost:3000)
 Почтовый ящик: (http://localhost:8025)    
 Документация backend-а: (http://localhost:8000/docs)
 
+### Запустить тесты
+
+``` bash
+docker compose exec app pytest --cov=app --cov-report=term-missing
+```
 ### БД
 
 ### Миграции базы данных
