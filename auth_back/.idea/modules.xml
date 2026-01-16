@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/auth_back.iml" filepath="$PROJECT_DIR$/.idea/auth_back.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../auth_front/.idea/auth_front.iml" filepath="$PROJECT_DIR$/../auth_front/.idea/auth_front.iml" />
+    </modules>
+  </component>
+</project>

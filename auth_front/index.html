@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">FilmFlow Auth</div>
+        <div id="nav-links">
+            </div>
+    </nav>
+
+    <div class="container">
+        <div id="view-login" class="view hidden">
+            <h2>Вход</h2>
+            <form id="login-form">
+                <input type="email" name="username" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+            </form>
+            <p><a href="/register" data-link>Нет аккаунта? Зарегистрироваться</a></p>
+            <p><a href="/forgot-password" data-link>Забыли пароль?</a></p>
+        </div>
+
+        <div id="view-register" class="view hidden">
+            <h2>Регистрация</h2>
+            <form id="register-form">
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="username" placeholder="Имя пользователя" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <input type="password" name="confirm_password" placeholder="Повторите пароль" required>
+                <button type="submit">Создать аккаунт</button>
+            </form>
+            <p><a href="/login" data-link>Уже есть аккаунт? Войти</a></p>
+        </div>
+
+        <div id="view-profile" class="view hidden">
+            <h2>Мой Профиль</h2>
+            <div class="profile-info">
+                <p><strong>ID:</strong> <span id="p-id"></span></p>
+                <p><strong>Email:</strong> <span id="p-email"></span></p>
+                <p><strong>Username:</strong> <span id="p-username"></span></p>
+                <p><strong>Роль:</strong> <span id="p-role"></span></p>
+            </div>
+
+            <hr>
+
+            <h3>Сменить имя</h3>
+            <form id="change-username-form">
+                <input type="text" name="username" id="new-username" placeholder="Новое имя">
+                <button type="submit">Сохранить имя</button>
+            </form>
+
+            <hr>
+
+            <h3>Сменить пароль</h3>
+            <form id="change-password-form">
+                <input type="password" name="old_password" placeholder="Старый пароль">
+                <input type="password" name="password" placeholder="Новый пароль">
+                <input type="password" name="confirm_password" placeholder="Повторить новый">
+                <button type="submit">Обновить пароль</button>
+            </form>
+        </div>
+
+        <div id="view-verify" class="view hidden">
+            <h2>Проверка почты...</h2>
+            <p id="verify-message">Подождите секунду.</p>
+            <a href="/login" data-link>Вернуться ко входу</a>
+        </div>
+
+        <div id="view-forgot" class="view hidden">
+            <h2>Сброс пароля</h2>
+            <form id="forgot-form">
+                <input type="email" name="email" placeholder="Ваш Email" required>
+                <button type="submit">Отправить ссылку</button>
+            </form>
+            <a href="/login" data-link>Назад</a>
+        </div>
+
+        <div id="view-reset" class="view hidden">
+            <h2>Установка нового пароля</h2>
+            <form id="reset-form">
+                <input type="password" name="password" placeholder="Новый пароль" required>
+                <input type="password" name="confirm_password" placeholder="Подтверждение" required>
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="hidden"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+
+services:
+  # Микросервис
+  app:
+    build: .
+    container_name: auth_service_app
+    working_dir: /app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      # Прокидываем код внутрь, чтобы работала "горячая перезагрузка" (reload) при разработке
+      - .:/app
+
+  # База данных PostgreSQL
+  db:
+    image: postgres:18-alpine
+    container_name: auth_service_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      DEV_MAIL_SERVER: host.docker.internal
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mailpit:
+    image: 'axllent/mailpit:latest'
+    container_name: mail_server
+    ports:
+      - "1025:1025" # SMTP порт для перехвата писем
+      - "8025:8025" # Веб-интерфейс для просмотра писем
+    restart: unless-stopped
+volumes:
+  postgres_data:

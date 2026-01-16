@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  frontend:
+      build: .
+      container_name: auth_frontend
+      ports:
+        - "3000:80"  # Открываем на порту 3000
